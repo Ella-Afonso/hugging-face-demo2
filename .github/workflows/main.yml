@@ -1,0 +1,36 @@
+# Name of the workflow
+name: Sync to Hugging Face hub
+
+# Defines the events under which the workflow will run
+on:
+  # Triggers the workflow when there is a push to the 'main' branch
+  push:
+    branches: [main]
+  # Allows the workflow to be manually triggered from GitHub Actions tab
+  workflow_dispatch:
+
+# Defines the jobs to be run as part of this workflow
+jobs:
+  # Job identifier, can be named anything, here it is 'sync-to-hub'
+  sync-to-hub:
+    # Specifies the type of virtual host machine to run the job on
+    runs-on: ubuntu-latest
+
+    # Steps are the sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2  # Uses a pre-built action to check out the repository code
+      with:
+        fetch-depth: 0  # Fetches all history for all branches and tags, necessary for a complete history
+
+    - name: Add remote  # Step to add a new remote repository
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}  # Uses a secret token for Hugging Face authentication
+      run: |
+        git remote add huggingface https://huggingface.co/spaces/RootedInCode/demo2  # Adds a remote named 'huggingface'
+        git fetch huggingface  # Fetches the latest changes from the 'huggingface' remote
+
+    - name: Push to hub  # Step to push the changes to the Hugging Face Spaces
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}  # Again, uses the Hugging Face secret token
+      run: |
+        git push --force huggingface main  # Force pushes the main branch to the Hugging Face remote
