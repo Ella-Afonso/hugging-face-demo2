@@ -22,6 +22,11 @@ jobs:
       with:
         fetch-depth: 0  # Fetches all history for all branches and tags, necessary for a complete history
 
+    - name: Setup Git Authentication
+      run: |
+        git config --global user.email "daniella.afonso@outlook.com"
+        git config --global user.name "Ella-Afonso"    
+
     - name: Add remote  # Step to add a new remote repository
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}  # Uses a secret token for Hugging Face authentication
