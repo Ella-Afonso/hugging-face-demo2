@@ -13,3 +13,5 @@
 [![Sync to Hugging Face hub](https://github.com/Ella-Afonso/hugging-face-demo2/actions/workflows/main.yml/badge.svg)](https://github.com/Ella-Afonso/hugging-face-demo2/actions/workflows/main.yml)
 
 [Try Demo Text Summarisation Here] (https://huggingface.co/spaces/RootedInCode/demo2)
+
+![image](https://github.com/user-attachments/assets/7efd4349-74a3-4188-961c-77db22eaec84)
